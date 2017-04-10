@@ -26,7 +26,7 @@ def shell_sort(lists):
                 k = j - group
                 key = lists[j]
                 while k >= 0:
-                    if Lists[k] > key:
+                    if lists[k] > key:
                         lists[k + group] = lists[k]
                         lists[k] = key
                     k -= group
@@ -34,7 +34,16 @@ def shell_sort(lists):
         group /= step
     return lists
 
+def bubble_sort(lists):
+    '''冒泡排序'''
+    count = len(lists)
+    for i in range(0, count):
+        for j in range(i + 1, count):
+            if lists[i] > lists[j]:
+                lists[i], lists[j] = lists[j], lists[i]
+    return lists
 
-Lists = [3, 5, 1, 7, 3, 11, 89, 34]
-#print insert_sort(Lists)
-print shell_sort(Lists)
+LISTS = [3, 5, 1, 7, 3, 11, 89, 34]
+#print insert_sort(LISTS)
+#print shell_sort(LISTS)
+print bubble_sort(LISTS)
