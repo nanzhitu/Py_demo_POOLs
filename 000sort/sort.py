@@ -65,10 +65,21 @@ def quick_sort(lists, left, right):
     quick_sort(lists, left + 1, high)
     return lists
 
+def select_sort(lists):
+    '''选择排序'''
+    count = len(lists)
+    for i in range(0, count):
+        min_ = i
+        for j in range(i + 1, count):
+            if lists[min_] > lists[j]:
+                min_ = j
+        lists[min_], lists[i] = lists[i], lists[min_]
+    return lists
 
 LISTS = [3, 5, 1, 7, 2, 11, 89, 34]
 #print insert_sort(LISTS)
 #print shell_sort(LISTS)
 #print bubble_sort(LISTS)
 print LISTS
-print quick_sort(LISTS, 0, 7)
+#print quick_sort(LISTS, 0, 7)
+print select_sort(LISTS)
