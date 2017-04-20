@@ -1,0 +1,16 @@
+die
+kill
+pc is
+restart
+coredump
+signal
+mutex
+Emergency
+trace
+crash
+dead
+panic
+assert
+NULL
+BUG
+terminated
