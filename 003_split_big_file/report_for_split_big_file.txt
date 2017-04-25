@@ -1,0 +1,81 @@
+
+测试的文件大小为1.31G的txt文件
+start_time = time.time()
+i =0 
+print "begin"
+
+def read_in_block(file_path,BLOCK_SIZE):
+    with open(file_path,"r") as f:
+        while True:
+            block =f.readlines(BLOCK_SIZE)
+            if block:
+                yield block
+            else:
+                return
+BLOCK_SIZE = 1000
+for block in read_in_block('neo.log',BLOCK_SIZE):
+    i = i+1
+print "when BLOCK_SIZE = ",BLOCK_SIZE,"  i = ",i,"  time is",time.time() - start_time , "s"
+
+打印如下：
+begin
+when BLOCK_SIZE =  1000   i =  171545   time is 343.690999985 s
+when BLOCK_SIZE =  100000   i =  13403   time is 351.677999973 s
+when BLOCK_SIZE =  10000000   i =  142   time is 359.647000074 s
+
+
+
+def test_readline():
+    i = 0
+    j = 0
+    start_time = time.time()
+    with open('neo.log') as file:
+        for line in file:
+            i = i+1
+            if i >10000 :
+                j = j+1
+                i = 0
+    print " when readline, time = ", time.time() - start_time , "s ", " i = ",i,"  j = ",j
+
+test_readline()
+
+打印如下：
+begin
+ when readline, time =  397.11500001 s   i =  3450   j =  1316
+ 
+ 
+f = open('neo.log')
+i = 0
+def read_last_line(start,size):
+    '''从文件尾部开始读取
+        start: 开始地址(从文件尾部倒推字节)
+        参考值：10w 约等于100kb
+               1000w 约等于 10mb
+        size : 读取字节
+    '''
+    global i 
+    i = i - start
+    j = 0
+    while True:
+        i = i - 1
+        f.seek(i,2)
+        if f.read(1) == '\n':
+            break
+    output = open('data_all.txt', 'w')
+    for line in f:
+        j = j +len(line)
+        if j < size:
+            output.write(line)
+    output.close()
+	
+start = 100000000
+size  = 10000000
+start_time = time.time()
+read_last_line(start,size)
+print " when size = ",size/1024/1024,"mb  time = ", time.time() - start_time , "s "
+ 
+ begin
+ when size =  9 mb  time =  9.47899985313 s 
+ 
+ 
+ 
